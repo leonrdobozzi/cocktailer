@@ -19,6 +19,7 @@ export default function Index() {
   const [drinkState, setDrinkState] = useState("Vodka");
   return (
     <ScrollView
+      showsVerticalScrollIndicator={false}
       contentInset={{ bottom: 150 }}
       style={globalStyles.safeAreaContainer}
     >
@@ -27,7 +28,7 @@ export default function Index() {
       <SearchBar placeholder="Search a drink" />
 
       <View style={styles.tabsContainer}>
-        <ScrollView horizontal={true}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <TabItem
             text="Whisky"
             active={drinkState === "Whisky" ? true : false}

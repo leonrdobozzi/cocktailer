@@ -27,7 +27,7 @@ export default function ItemsContainer({ route, title }: IItemsContainerProps) {
   return (
     <View style={styles.itemsContainer}>
       <Text style={styles.itemsContainerTitle}>{title && title}</Text>
-      <ScrollView horizontal={true}>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {drinks && drinks.length > 0 ? (
           drinks.map((drink: IDrink) => (
             <Item
@@ -38,7 +38,9 @@ export default function ItemsContainer({ route, title }: IItemsContainerProps) {
             />
           ))
         ) : (
-          <Text style={{ color: "#fff" }}>Drinks not found...</Text>
+          <Text style={{ color: "#fff", fontFamily: "MontserratBold" }}>
+            Drinks not found...
+          </Text>
         )}
       </ScrollView>
     </View>
