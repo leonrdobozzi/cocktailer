@@ -6,4 +6,10 @@ export const styles = StyleSheet.create({
     minHeight: 200,
     marginTop: 30,
   },
+  itemsContainerTitle: {
+    color: "#fff",
+    fontSize: 10,
+    marginBottom: 10,
+    fontFamily: "MontserratBold",
+  },
 });

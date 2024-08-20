@@ -5,29 +5,37 @@ import { useEffect, useState } from "react";
 import { api } from "@/services/api";
 
 interface IItemsContainerProps {
-  drink: string;
+  route: string;
+  title?: string;
 }
 
 interface IDrink {
   strDrinkThumb: string;
   strDrink: string;
+  idDrink: string;
 }
 
-export default function ItemsContainer({ drink }: IItemsContainerProps) {
+export default function ItemsContainer({ route, title }: IItemsContainerProps) {
   const [drinks, setDrinks] = useState([]);
 
   useEffect(() => {
-    api.get(`/filter.php?i=${drink}`).then((response) => {
+    api.get(route).then((response) => {
       setDrinks(response.data.drinks);
     });
-  }, [drink]);
+  }, [route]);
 
   return (
     <View style={styles.itemsContainer}>
+      <Text style={styles.itemsContainerTitle}>{title && title}</Text>
       <ScrollView horizontal={true}>
         {drinks && drinks.length > 0 ? (
           drinks.map((drink: IDrink) => (
-            <Item image={drink.strDrinkThumb} title={drink.strDrink} />
+            <Item
+              key={drink.idDrink}
+              id={drink.idDrink}
+              image={drink.strDrinkThumb}
+              title={drink.strDrink}
+            />
           ))
         ) : (
           <Text style={{ color: "#fff" }}>Drinks not found...</Text>

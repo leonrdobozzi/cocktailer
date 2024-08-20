@@ -1,11 +1,13 @@
 import { useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
-import { SafeAreaView, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import Title from "@/components/Title";
 import SearchBar from "@/components/SearchBar";
 import { globalStyles } from "./styles";
 import LikedButton from "@/components/LikedButton";
 import ItemsContainer from "@/components/ItemsContainer";
+import TabItem from "@/components/TabItem";
+import RandomDrink from "@/components/RandomDrink";
 
 export default function Index() {
   const navigation = useNavigation();
@@ -14,12 +16,16 @@ export default function Index() {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
 
-  const [drinkState, setDrinkState] = useState("Whisky");
+  const [drinkState, setDrinkState] = useState("Vodka");
   return (
-    <SafeAreaView style={globalStyles.safeAreaContainer}>
+    <ScrollView
+      contentInset={{ bottom: 150 }}
+      style={globalStyles.safeAreaContainer}
+    >
       <LikedButton />
       <Title text="Be more than a little drink!" />
       <SearchBar placeholder="Search a drink" />
+
       <View style={styles.tabsContainer}>
         <ScrollView horizontal={true}>
           <TabItem
@@ -43,11 +49,6 @@ export default function Index() {
             onPress={() => setDrinkState("Campari")}
           />
           <TabItem
-            text="Ballena"
-            active={drinkState === "Ballena" ? true : false}
-            onPress={() => setDrinkState("Ballena")}
-          />
-          <TabItem
             text="Beer"
             active={drinkState === "Beer" ? true : false}
             onPress={() => setDrinkState("Beer")}
@@ -59,17 +60,28 @@ export default function Index() {
           />
         </ScrollView>
       </View>
-      <ItemsContainer drink={drinkState} />
-    </SafeAreaView>
+      <ItemsContainer route={`/filter.php?i=${drinkState}`} />
+      <RandomDrink />
+      <View style={styles.lastContainerPadding}>
+        <ItemsContainer
+          title="Non Alcoholic"
+          route={`/filter.php?a=Non_Alcoholic`}
+        />
+      </View>
+    </ScrollView>
   );
 }
 
+//TODO: Create context to tabs and adjusts bottom padding of page scroll
 import { StyleSheet } from "react-native";
-import TabItem from "@/components/TabItem";
 
 export const styles = StyleSheet.create({
   tabsContainer: {
     paddingLeft: 24,
     marginTop: 50,
+  },
+
+  lastContainerPadding: {
+    paddingBottom: 40,
   },
 });
