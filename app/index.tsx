@@ -4,7 +4,6 @@ import { ScrollView, View } from "react-native";
 import Title from "@/components/Title";
 import SearchBar from "@/components/SearchBar";
 import { globalStyles } from "./styles";
-import LikedButton from "@/components/LikedButton";
 import ItemsContainer from "@/components/ItemsContainer";
 import TabItem from "@/components/TabItem";
 import RandomDrink from "@/components/RandomDrink";
@@ -23,7 +22,6 @@ export default function Index() {
       contentInset={{ bottom: 150 }}
       style={globalStyles.safeAreaContainer}
     >
-      <LikedButton />
       <Title text="Be more than a little drink!" />
       <SearchBar placeholder="Search a drink" />
 
